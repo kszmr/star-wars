@@ -1,15 +1,27 @@
-import React, {useEffect, useState} from 'react';
-import {genericController} from './api/generic-api';
-import {People} from './api/schemas/people';
+import { genericController, PageableResponse, PageData } from './api/generic-api';
+import { People } from './api/schemas/people';
+import { useEffect, useState } from 'react';
 
 export const App = () => {
-    const [schema, setSchema] = useState<People>();
-    const {getById} = genericController<People>('people');
+    const {getAll} = genericController<People>('people');
+    const [people, setPeople] = useState<People[]>();
+    const [page, setPage] = useState<PageData>();
+
     useEffect(() => {
-        getById(1).then(value => setSchema(value));
-    }, [])
-    
-    return (
-        <div>{schema ? `${schema.name} is a ${schema.gender} character.` : null}</div>
-    )
+        getAll(1).then(value => {
+            setPeople(value.data)
+            setPage(value.page);
+        });
+    }, []);
+
+    if (people) {
+        return (
+            <>
+            <div>Pages: Previous {page?.previous} - Next: {page?.next}</div>
+            {people.map(person => <div>{person.name}</div>)}
+            </>
+        )
+    } else {
+        return (<div></div>)
+    }
 }
