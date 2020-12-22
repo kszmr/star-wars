@@ -18,7 +18,8 @@ export interface PageableResponse<T> {
 export interface ResourceReturn<T> {
     getSchema: () => void;
     getById: (id: number) => Promise<T>;
-    getAll: (page: number) => Promise<PageableResponse<T>>
+    getAll: (page: number) => Promise<PageableResponse<T>>;
+    getByPartialName: (search: string, pageNumber: number) => Promise<PageableResponse<T>>;
 }
 
 export const genericController = <T> (endpoint: SWAPIEndpoint): ResourceReturn<T> => {
@@ -65,5 +66,5 @@ export const genericController = <T> (endpoint: SWAPIEndpoint): ResourceReturn<T
         return null;
     }
 
-    return {getSchema, getById, getAll}
+    return {getSchema, getById, getAll, getByPartialName}
 }

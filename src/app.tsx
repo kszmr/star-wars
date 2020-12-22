@@ -13,7 +13,7 @@ export const App = () => {
             setPage(value.page);
         });
     }, []);
-
+    
     if (people) {
         return (
             <>
