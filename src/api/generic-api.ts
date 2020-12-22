@@ -41,6 +41,13 @@ export const genericController = <T> (endpoint: SWAPIEndpoint): ResourceReturn<T
         return {page, data}
     }
 
+    const getByPartialName = async (search: string, pageNumber: number): Promise<PageableResponse<T>> => {
+        const response = await axios.get(`/${endpoint}/?search=${search}&page=${pageNumber}`);
+        const data: T[] = (response.data.results);
+        const page: PageData = getPageData(response);
+        return {page, data};
+    }
+
     const getPageData = (response: AxiosResponse):PageData => {
         const next: number | null = getPageNumber(response.data.next);
         const previous: number | null = getPageNumber(response.data.previous);
