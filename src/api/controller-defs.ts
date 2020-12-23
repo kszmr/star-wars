@@ -11,7 +11,7 @@ controllerData.set('people', {
     detailData: ['name', 'mass', 'hair_color', 'skin_color', 'gender']
 })
 
-controllerData.set('people', {
+controllerData.set('films', {
     detailData: ['title', 'director', 'producer', 'opening_crawl']
 })
 
