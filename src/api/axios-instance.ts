@@ -7,7 +7,7 @@ export const getAxiosInstance = ():AxiosInstance => {
      AxiosInstance.interceptors
      .response.use(response => response,
         (error) => {
-            const {status} = error.response;
+            const {status} = error?.response;
             if (status > 399) console.info(`API error. Status: ${status}`);
         }
         )

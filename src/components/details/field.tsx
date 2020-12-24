@@ -1,5 +1,5 @@
-import { Accordion, AccordionDetails, AccordionSummary, Grid } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons';
+import { Accordion, AccordionDetails, AccordionSummary, Grid, Typography } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 interface FieldProps {
     name: string,
@@ -13,12 +13,16 @@ export const Field = (props: FieldProps) => {
         <Grid item xs = {12}>
             <Accordion>
                 <AccordionSummary
-                    expandIcon = {<ExpandMoreIcon/>}
-                        aria-controls='panel1a-content'
+                    expandIcon={<ExpandMoreIcon/>}
+                        aria-controles='panel1-content'
                         id="panel1a-header">
-
+                    <Typography>{name}</Typography>
                 </AccordionSummary>
+                <AccordionDetails>
+                    <Typography>{value}</Typography>
+                </AccordionDetails>
             </Accordion>
+
         </Grid>
     )
 }

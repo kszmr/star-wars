@@ -1,31 +1,34 @@
-import { CircularProgress, Grid } from "@material-ui/core";
+import { CircularProgress, Grid, Button } from "@material-ui/core";
 import { SWAPIEndpoint } from "../../api/generic-api";
 import { getDetailData } from "../../api/controller-defs"
-import {field} from "./field";
+import { Field } from "./field";
+import { useDetail } from "./use-detail";
+import { People } from "../../api/schemas/people"
+import { GenericSchema } from './../../api/schemas/generic-schema';
 
 interface DetailProps {
     id: number;
     controller: SWAPIEndpoint;
 }
 
-const Detail = (props: DetailProps) => {
+export const Detail = <T extends GenericSchema>(props: DetailProps) => {
     const {id, controller} = props;
-    const {isLoading, result, error} = useDetail(id, controller);
+    const {isLoading, result, error} = useDetail<T>(id, controller);
     const columns = getDetailData(controller);
 
-    if (isLoading) return <div><CircularProgress/></div>
+    if (isLoading) return <div className={"center"}><CircularProgress/></div>
     if (!result) return null;
     return (
         <Grid container direction={"column"} spacing={2} alignItems={'stretch'}>
             <Grid>
                 {Object
-                    .entries(results)
+                    .entries(result)
                     .filter(item => {
-                        const [key] = items;
+                        const [key] = item;
                         return columns?.find(field => field === key);
                     })
                     .map(item => {
-                        const [key, value] = item;
+                        const [key, value]:any = item;
                         return <Field name = {key} value = {value}/>
                     })}
             </Grid>

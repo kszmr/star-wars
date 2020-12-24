@@ -1,6 +1,6 @@
-import {useState} from 'react';
+import { useState, useEffect } from 'react';
 
-interface AsyncReturnType <T> {
+export interface AsyncReturnType <T> {
     isLoading: boolean;
     error: boolean;
     result: T | undefined;

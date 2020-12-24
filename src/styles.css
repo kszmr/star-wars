@@ -1,0 +1,14 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.center {
+    display: grid;
+    place-items: center;
+    width: 100vh;
+    height: 100vh;
+}
+
